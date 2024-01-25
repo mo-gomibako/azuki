@@ -18,6 +18,7 @@ const rpc = new Hono<{ Bindings: Bindings }>()
       });
       return middleware(c, next);
     }
+    return await next();
   })
   .get("users", async (c) => {
     const db = drizzle(c.env.DB);
