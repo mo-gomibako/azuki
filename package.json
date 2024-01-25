@@ -4,10 +4,14 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "generate:migrations": "drizzle-kit generate:sqlite",
+    "migrate:local": "pnpm generate:migrations && wrangler d1 migrations apply azuki-db --local",
+    "migrate:prod": "pnpm generate:migrations && wrangler d1 migrations apply azuki-db",
+    "dev:db": "pnpm migrate:local && wrangler dev --port 8787",
+    "dev:app": "remix vite:dev",
     "build": "remix vite:build",
-    "dev": "remix vite:dev",
     "start": "http-server build/client/",
-    "deploy": "pnpm build && wrangler pages deploy build && wrangler deploy --minify app/rpc.ts",
+    "deploy:prod": "pnpm build && wrangler pages deploy build && wrangler deploy --minify app/rpc.ts",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "fmt": "prettier ./app --write",
     "typecheck": "tsc"
@@ -15,6 +19,8 @@
   "dependencies": {
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
+    "drizzle-orm": "^0.29.3",
+    "drizzle-zod": "^0.5.1",
     "hono": "^3.12.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -25,6 +31,7 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "drizzle-kit": "^0.20.13",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",

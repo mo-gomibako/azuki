@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { rpcClient } from "~/rpcClient";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,7 +9,14 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function clientLoader() {
+  const res = await rpcClient.api.items.$get();
+  return await res.json();
+}
+
 export default function Index() {
+  const data = useLoaderData<typeof clientLoader>();
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix (SPA Mode)</h1>
@@ -26,6 +35,11 @@ export default function Index() {
             Remix Docs
           </a>
         </li>
+      </ul>
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
       </ul>
     </div>
   );

@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1706082615367,
+      "tag": "0000_curved_loa",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1706166355206,
+      "tag": "0001_elite_lord_tyger",
+      "breakpoints": true
+    }
+  ]
+}
