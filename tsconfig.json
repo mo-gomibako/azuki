@@ -13,6 +13,7 @@
 
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "resolvePackageJsonExports": false,
 
     "strict": true,
     "allowJs": true,
@@ -20,7 +21,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"],
+      "@/*": ["./app/*"],
     },
 
     "types": ["@cloudflare/workers-types"],
