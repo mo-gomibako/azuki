@@ -15,6 +15,20 @@
       "when": 1706166355206,
       "tag": "0001_elite_lord_tyger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1706677436712,
+      "tag": "0002_mixed_hex",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1706689431684,
+      "tag": "0003_serious_wallop",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { NavLink, useLoaderData } from "@remix-run/react";
-import { rpcClient } from "@/rpcClient";
+import { rpcClient } from "@/rpc/client";
 import { ComponentProps, PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 
@@ -9,8 +9,11 @@ export const meta: MetaFunction = () => {
 };
 
 export async function clientLoader() {
-  const res = await rpcClient.api.items.$get();
-  return await res.json();
+  const items = await rpcClient.api.items.$get().then((v) => v.json());
+  const sessionUser = await rpcClient.api.session_user
+    .$get()
+    .then((v) => v.json());
+  return { items, sessionUser };
 }
 
 export default function Index() {
@@ -113,6 +116,14 @@ function Layout({ children }: PropsWithChildren) {
 
       <div className="fixed left-0 top-0 grid h-[var(--header-height)] w-[var(--navigation-rail-width)] place-content-center font-emoji text-32 leading-32+4*2 text-brand">
         🫘
+      </div>
+      <div className="fixed right-0 top-0 grid h-[var(--header-height)] place-content-center pr-16">
+        <a
+          href={rpcClient.api.login.google.$url().toString()}
+          className="inline-grid h-40 place-content-center rounded-full bg-brand px-16 text-14 font-bold"
+        >
+          ログイン
+        </a>
       </div>
     </div>
   );

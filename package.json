@@ -11,18 +11,21 @@
     "dev:app": "remix vite:dev",
     "build": "remix vite:build",
     "start": "http-server build/client/",
-    "deploy:prod": "pnpm build && wrangler pages deploy build/client && wrangler deploy --minify app/rpc.ts",
+    "deploy:prod": "pnpm build && wrangler pages deploy build/client && wrangler deploy --minify app/rpc/index.ts",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "fmt": "prettier ./app --write",
     "typecheck": "tsc"
   },
   "dependencies": {
     "@charcoal-ui/theme": "^3.7.0",
+    "@lucia-auth/adapter-drizzle": "^1.0.0",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
+    "arctic": "^1.1.0",
     "drizzle-orm": "^0.29.3",
     "drizzle-zod": "^0.5.1",
     "hono": "^3.12.6",
+    "lucia": "^3.0.1",
     "react": "18.3.0-canary-3d9b20132-20240124",
     "react-dom": "18.3.0-canary-3d9b20132-20240124",
     "tailwind-variants": "^0.1.20"
