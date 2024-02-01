@@ -9,3 +9,9 @@
     size-adjust: 0%;
   }
 }
+
+@layer components {
+  .overlay {
+    @apply before:absolute before:inset-0 before:rounded-full before:bg-surface3 before:content-[''];
+  }
+}
