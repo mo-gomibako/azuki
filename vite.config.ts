@@ -3,5 +3,8 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  server: {
+    port: 5174,
+  },
   plugins: [remix({ unstable_ssr: false }), tsconfigPaths()],
 });

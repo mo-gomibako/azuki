@@ -9,6 +9,9 @@ const fontSize = (size: keyof typeof dark.typography.size) =>
 const lineHeight = (size: keyof typeof dark.typography.size) =>
   px(dark.typography.size[size].lineHeight);
 
+const borderRadius = (size: keyof typeof dark.borderRadius) =>
+  px(dark.borderRadius[size]);
+
 const spacing = (size: keyof typeof dark.spacing) => px(dark.spacing[size]);
 
 export default {
@@ -45,6 +48,14 @@ export default {
       "20+4*2": lineHeight(20),
       "32+4*2": lineHeight(32),
     },
+    borderRadius: {
+      0: borderRadius("none"),
+      4: borderRadius(4),
+      8: borderRadius(8),
+      16: borderRadius(16),
+      24: borderRadius(24),
+      full: borderRadius("oval"),
+    },
     screens: {
       compact: { max: "599px" },
       medium: { min: "600px", max: "839px" },
@@ -52,7 +63,7 @@ export default {
       large: { min: "1200px" },
     },
     dropShadow: {
-      4: `0px 0px 4px ${dark.color.background2}`,
+      4: `0px 0px 4px ${dark.color.background1}`,
     },
     extend: {
       fontFamily: {

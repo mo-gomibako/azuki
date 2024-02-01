@@ -1,10 +1,11 @@
 export default function Icon({
   name,
-  size,
+  size = 24,
+  wght = 500,
 }: {
   name: string;
-  size: number;
-  children?: string;
+  size?: number;
+  wght?: 200 | 500;
 }) {
   return (
     <span
@@ -13,7 +14,7 @@ export default function Icon({
       style={{
         // NOTE: 透明なフォントにfallbackすることで、ligatureの変換前の文字列が表示されるのを防ぐ
         fontFamily: "'Material Symbols Outlined', Skeleton",
-        fontVariationSettings: `"FILL" 0, "wght" 200, "GRAD" 0, "opsz" ${size}`,
+        fontVariationSettings: `"FILL" 0, "wght" ${wght}, "GRAD" 0, "opsz" ${size}`,
         fontSize: size,
         width: size,
         height: size,

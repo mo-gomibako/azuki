@@ -43,7 +43,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-background2 font-noto text-text2">
+      <body className="bg-background1 font-noto text-text2">
         <Layout>
           <Outlet />
         </Layout>
@@ -64,7 +64,7 @@ export function HydrateFallback() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-background2 font-noto text-text2">
+      <body className="bg-background1 font-noto text-text2">
         <Layout />
         <Scripts />
         <LiveReload />
