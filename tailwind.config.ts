@@ -51,11 +51,13 @@ export default {
       expanded: { min: "840px", max: "1199px" },
       large: { min: "1200px" },
     },
+    dropShadow: {
+      4: `0px 0px 4px ${dark.color.background2}`,
+    },
     extend: {
       fontFamily: {
         emoji: ["Noto Emoji"],
         noto: ["Noto Sans JP", "sans-serif"],
-        rochester: ["Rochester", "cursive"],
       },
     },
   },

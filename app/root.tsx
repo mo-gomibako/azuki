@@ -9,6 +9,7 @@ import {
 } from "@remix-run/react";
 
 import "@/tailwind.css";
+import Layout from "./components/Layout";
 
 export const links: LinksFunction = () => {
   return [
@@ -20,11 +21,15 @@ export const links: LinksFunction = () => {
     },
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Noto+Emoji&family=Noto+Sans+JP:wght@400;700&family=Rochester&display=swap",
+      href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap",
     },
     {
       rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+      href: "https://fonts.googleapis.com/css2?family=Noto+Emoji&text=%F0%9F%AB%98&display=block",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap",
     },
   ];
 };
@@ -39,7 +44,9 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-background2 font-noto text-text2">
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -58,7 +65,7 @@ export function HydrateFallback() {
         <Links />
       </head>
       <body className="bg-background2 font-noto text-text2">
-        <p>Loading...</p>
+        <Layout />
         <Scripts />
         <LiveReload />
       </body>
