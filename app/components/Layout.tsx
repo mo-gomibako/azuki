@@ -53,7 +53,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <div className="fixed right-0 top-0 grid h-[var(--header-height)] place-content-center pr-16">
         <a
           href={rpcClient.api.login.google.$url().toString()}
-          className="inline-grid h-40 place-content-center rounded-full bg-brand px-16 text-14 font-bold drop-shadow-4 hover:before:absolute hover:before:inset-0 hover:before:bg-surface3 hover:before:content-['']"
+          className="relative z-0 inline-grid h-40 place-content-center rounded-full bg-brand px-16 text-14 font-bold drop-shadow-4 hover:before:absolute hover:before:inset-0 hover:before:bg-surface3 hover:before:content-['']"
         >
           ログイン
         </a>
