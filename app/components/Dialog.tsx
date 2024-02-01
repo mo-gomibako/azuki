@@ -75,7 +75,10 @@ export default function Dialog({
               aria-describedby={descriptionId}
               {...getFloatingProps()}
             >
-              <h2 className="text-center text-16 font-bold" id={headingId}>
+              <h2
+                className="text-center text-16 font-bold leading-16+4*2"
+                id={headingId}
+              >
                 {title}
               </h2>
               <div>

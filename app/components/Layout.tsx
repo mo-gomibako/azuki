@@ -57,7 +57,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <button
           {...getReferenceProps()}
           ref={setReference}
-          className="hover:overlay relative z-0 inline-grid h-40 place-content-center rounded-full bg-brand px-16 text-14 font-bold text-text5 drop-shadow-4 hover:before:rounded-full"
+          className="hover:overlay relative z-0 inline-grid h-40 place-content-center rounded-full bg-brand px-16 text-14 font-bold leading-14+4*2 text-text5 drop-shadow-4 hover:before:rounded-full"
         >
           ログイン
         </button>
@@ -118,7 +118,8 @@ function GoogleLoginLink({ to }: { to: string }) {
     >
       <div className="inline-flex items-center gap-[10px]">
         <svg
-          className="size-[20px]"
+          width={20}
+          height={20}
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 48 48"
@@ -142,7 +143,9 @@ function GoogleLoginLink({ to }: { to: string }) {
           ></path>
           <path fill="none" d="M0 0h48v48H0z"></path>
         </svg>
-        <span className="text-14 font-bold">Googleでログイン</span>
+        <span className="font-['Roboto',_arial,_sans-serif] text-14 font-bold leading-14+4*2">
+          Googleでログイン
+        </span>
       </div>
     </a>
   );
@@ -153,11 +156,11 @@ function AppleLoginLink() {
     <a
       href="api/login/apple"
       aria-disabled="true"
-      className="inline-grid h-40 w-272 place-content-center rounded-full bg-[white] text-14 font-bold text-[black]"
+      className="inline-grid h-40 w-272 place-content-center rounded-full bg-[white] text-[black]"
     >
-      <div className="inline-flex items-center">
+      <div className="inline-flex h-[38px] items-center overflow-hidden">
         <svg
-          height="40px"
+          height={40}
           viewBox="0 0 31 44"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +192,9 @@ function AppleLoginLink() {
             ></path>
           </g>
         </svg>
-        Appleでサインイン
+        <span className="font-['Segoe_UI',Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif] text-14 font-bold leading-14+4*2">
+          Appleでサインイン
+        </span>
       </div>
     </a>
   );
