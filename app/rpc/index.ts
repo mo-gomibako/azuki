@@ -32,13 +32,13 @@ app.use("*", async (c, next) => {
 
 app.use("*", async (c, next) => {
   if (c.env.DEV !== "development") {
-    return await next();
+    const middleware = csrf({
+      origin: "https://azuki.momoogles.net",
+    });
+    return middleware(c, next);
   }
 
-  const middleware = csrf({
-    origin: "https://azuki.momoogles.net",
-  });
-  return middleware(c, next);
+  return await next();
 });
 
 app.use("*", async (c, next) => {
