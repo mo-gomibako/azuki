@@ -10,6 +10,7 @@ import { oauthAccounts, users } from "@/schema";
 import { and, eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import initializeHono from "@/initializeHono";
+import { dev } from "@/env";
 
 const google = initializeHono()
   .get("/", async (c) => {
@@ -20,13 +21,13 @@ const google = initializeHono()
     setCookie(c, "google_oauth_state", state, {
       path: "/",
       httpOnly: true,
-      secure: c.env.DEV !== "development",
+      secure: true,
       maxAge: 60 * 10,
     });
     setCookie(c, "google_oauth_code_verifier", codeVerifier, {
       path: "/",
       httpOnly: true,
-      secure: c.env.DEV !== "development",
+      secure: true,
       maxAge: 60 * 10,
     });
 
@@ -90,11 +91,11 @@ const google = initializeHono()
         );
         const sessionCookie = lucia.createSessionCookie(session.id);
         c.res.headers.append("Set-Cookie", sessionCookie.serialize());
-        return c.redirect(
-          c.env.DEV === "development"
-            ? "http://localhost:5174/"
-            : "https://azuki.momoogles.net",
-        );
+
+        if (dev(c.env)) {
+          return c.redirect("http://localhost:5174/");
+        }
+        return c.redirect("https://azuki.momoogles.net");
       }
 
       const userId = crypto.randomUUID();
@@ -115,11 +116,11 @@ const google = initializeHono()
       const session = await lucia.createSession(userId, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
       c.res.headers.append("Set-Cookie", sessionCookie.serialize());
-      return c.redirect(
-        c.env.DEV === "development"
-          ? "http://localhost:5174/"
-          : "https://azuki.momoogles.net",
-      );
+
+      if (dev(c.env)) {
+        return c.redirect("http://localhost:5174/");
+      }
+      return c.redirect("https://azuki.momoogles.net");
     } catch (e) {
       if (e instanceof OAuth2RequestError) {
         throw new HTTPException(400, { message: "Invalid request" });

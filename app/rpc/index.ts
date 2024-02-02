@@ -8,6 +8,7 @@ import initializeLucia from "@/initializeLucia";
 import { drizzle } from "drizzle-orm/d1";
 import { apiSessionUser } from "./api/sessionUser";
 import { csrf } from "hono/csrf";
+import { dev } from "@/env";
 
 const api = initializeHono()
   .route("users", apiUsers)
@@ -18,38 +19,34 @@ const api = initializeHono()
 const app = initializeHono();
 
 app.use("*", async (c, next) => {
-  if (c.env.DEV !== "development") {
-    return await next();
-  }
-
-  const middleware = cors({
-    origin: "*",
-    allowMethods: ["GET", "OPTIONS"],
-    credentials: true,
-  });
-  return middleware(c, next);
-});
-
-app.use("*", async (c, next) => {
-  if (c.env.DEV !== "development") {
-    const middleware = csrf({
-      origin: "https://azuki.momoogles.net",
+  // NOTE: 開発環境ではcorsの制限を緩くしてcookieをのせたい
+  if (dev(c.env)) {
+    const middleware = cors({
+      origin: "http://localhost:5174",
+      allowMethods: ["GET", "OPTIONS"],
+      credentials: true,
     });
     return middleware(c, next);
   }
-
+  // NOTE: 本番環境では同ドメインになる
   return await next();
+});
+
+app.use("*", async (c, next) => {
+  // if (dev(c.env)) {
+  //   return await next();
+  // }
+  // NOTE: 本番環境ではGET,HEAD以外はheaderのOriginと比較しておく
+  const middleware = csrf({
+    origin: "https://azuki.momoogles.net",
+  });
+  return middleware(c, next);
 });
 
 app.use("*", async (c, next) => {
   const db = drizzle(c.env.DB);
   const lucia = initializeLucia(db);
   const sessionId = getCookie(c, lucia.sessionCookieName);
-
-  console.log({
-    cookieName: lucia.sessionCookieName,
-    sessionId,
-  });
 
   if (!sessionId) {
     c.set("user", null);
