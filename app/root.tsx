@@ -1,7 +1,6 @@
 import { LinksFunction } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -49,7 +48,6 @@ export default function App() {
         </Layout>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
@@ -67,7 +65,6 @@ export function HydrateFallback() {
       <body className="bg-background1 font-noto text-text2">
         <Layout />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
