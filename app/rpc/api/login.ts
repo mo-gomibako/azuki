@@ -9,8 +9,16 @@ import { drizzle } from "drizzle-orm/d1";
 import { oauthAccounts, users } from "@/schema";
 import { and, eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
-import initializeHono from "@/initializeHono";
+import initializeHono, { HonoEnv } from "@/initializeHono";
 import { dev } from "@/env";
+import { Context } from "hono";
+
+function redirectApp(c: Context<HonoEnv>, path: `/${string}`) {
+  if (dev(c.env)) {
+    return c.redirect("http://localhost:5174" + path);
+  }
+  return c.redirect("https://azuki.momoogles.net" + path);
+}
 
 const google = initializeHono()
   .get("/", async (c) => {
@@ -57,7 +65,7 @@ const google = initializeHono()
       const lucia = initializeLucia(db);
       const googleAuth = initializeGoogleAuth(c);
 
-      const tokens = await googleAuth.validateAuthorizationCode(
+      const { accessToken } = await googleAuth.validateAuthorizationCode(
         code,
         storedCodeVerifier,
       );
@@ -65,7 +73,7 @@ const google = initializeHono()
         "https://openidconnect.googleapis.com/v1/userinfo",
         {
           headers: {
-            Authorization: `Bearer ${tokens.accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       ).then((res) => res.json())) as {
@@ -92,10 +100,7 @@ const google = initializeHono()
         const sessionCookie = lucia.createSessionCookie(session.id);
         c.res.headers.append("Set-Cookie", sessionCookie.serialize());
 
-        if (dev(c.env)) {
-          return c.redirect("http://localhost:5174/");
-        }
-        return c.redirect("https://azuki.momoogles.net");
+        return redirectApp(c, "/");
       }
 
       const userId = crypto.randomUUID();
@@ -117,10 +122,7 @@ const google = initializeHono()
       const sessionCookie = lucia.createSessionCookie(session.id);
       c.res.headers.append("Set-Cookie", sessionCookie.serialize());
 
-      if (dev(c.env)) {
-        return c.redirect("http://localhost:5174/");
-      }
-      return c.redirect("https://azuki.momoogles.net");
+      return redirectApp(c, "/");
     } catch (e) {
       if (e instanceof OAuth2RequestError) {
         throw new HTTPException(400, { message: "Invalid request" });
