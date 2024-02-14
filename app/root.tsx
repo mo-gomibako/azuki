@@ -9,9 +9,11 @@ import {
 
 import "@/tailwind.css";
 import Layout from "./components/Layout";
+import { cssBundleHref } from "@remix-run/css-bundle";
 
 export const links: LinksFunction = () => {
   return [
+    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
     {
       rel: "preconnect",

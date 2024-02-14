@@ -20,6 +20,7 @@
     "@charcoal-ui/theme": "^3.7.0",
     "@floating-ui/react": "^0.26.9",
     "@lucia-auth/adapter-drizzle": "^1.0.0",
+    "@remix-run/css-bundle": "^2.6.0",
     "@remix-run/node": "^2.6.0",
     "@remix-run/react": "^2.6.0",
     "arctic": "^1.1.4",

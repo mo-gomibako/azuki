@@ -14,6 +14,9 @@ dependencies:
   '@lucia-auth/adapter-drizzle':
     specifier: ^1.0.0
     version: 1.0.0(lucia@3.0.1)
+  '@remix-run/css-bundle':
+    specifier: ^2.6.0
+    version: 2.6.0
   '@remix-run/node':
     specifier: ^2.6.0
     version: 2.6.0(typescript@5.3.3)
@@ -2267,6 +2270,11 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
+
+  /@remix-run/css-bundle@2.6.0:
+    resolution: {integrity: sha512-c3I1FVsWeBoA3c92Fwa1sufxAlosovfE2V7hwjc9HeQHA3DAHe18RXfgU6my/IvpItkIvaEgQPuoWEA6Dh8VDQ==}
+    engines: {node: '>=18.0.0'}
+    dev: false
 
   /@remix-run/dev@2.6.0(typescript@5.3.3)(vite@5.0.12)(wrangler@3.26.0):
     resolution: {integrity: sha512-wf5DoKxBwz3/84FNyFM6NKvQIOEv+Ukwj9DjXrDs6YLI6oSqw2XsJCxWN4lAbOxXuK37pBt1WAE8LzEMuyowsw==}
