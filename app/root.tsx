@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import "@/tailwind.css";
+
 import Layout from "./components/Layout";
 import { cssBundleHref } from "@remix-run/css-bundle";
 
