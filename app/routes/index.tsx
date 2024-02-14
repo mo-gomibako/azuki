@@ -1,24 +1,14 @@
-import type { MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { rpcClient } from "@/rpc/client";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const meta: MetaFunction = () => {
-  return [{ title: "azuki" }, { name: "description", content: "🫘" }];
-};
+export const Route = createFileRoute("/")({
+  component: Root,
+  beforeLoad: () => ({
+    getTitle: () => "azuki",
+    getDescription: () => "🫘",
+  }),
+});
 
-export async function clientLoader() {
-  const items = await rpcClient.api.items.$get().then((v) => v.json());
-  const sessionUser = await rpcClient.api.session_user
-    .$get()
-    .then((v) => v.json());
-  return { items, sessionUser };
-}
-
-export default function Index() {
-  const data = useLoaderData<typeof clientLoader>();
-
-  console.log(data);
-
+function Root() {
   return (
     <div className="grid gap-24">
       <div className="text-20 leading-20+4*2">

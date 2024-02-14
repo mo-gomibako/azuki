@@ -1,7 +1,18 @@
-import { unstable_vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
+import TsconfigPaths from "vite-tsconfig-paths";
+import React from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
-  plugins: [remix({ unstable_ssr: false }), tsconfigPaths()],
+  build: {
+    outDir: "build/client",
+  },
+  plugins: [
+    React(),
+    TsconfigPaths(),
+    TanStackRouterVite({
+      routesDirectory: "app/routes",
+      generatedRouteTree: "app/routeTree.gen.tsx",
+    }),
+  ],
 });

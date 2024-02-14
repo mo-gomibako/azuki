@@ -1,9 +1,9 @@
-import { NavLink } from "@remix-run/react";
 import { rpcClient } from "@/rpc/client";
 import { ComponentProps, PropsWithChildren } from "react";
 import { tv } from "tailwind-variants";
 import Icon from "./Icon";
 import Dialog, { useDialog } from "./Dialog";
+import { Link } from "@tanstack/react-router";
 
 export default function Layout({ children }: PropsWithChildren) {
   const { getReferenceProps, setReference, ...modalProps } = useDialog();
@@ -83,7 +83,7 @@ function IconNav({
   children: string;
 }) {
   return (
-    <NavLink
+    <Link
       to={to}
       className="inline-grid size-full place-content-center p-8 hover:bg-surface3"
     >
@@ -106,7 +106,7 @@ function IconNav({
       >
         {children}
       </span>
-    </NavLink>
+    </Link>
   );
 }
 

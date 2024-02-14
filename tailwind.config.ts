@@ -15,7 +15,7 @@ const borderRadius = (size: keyof typeof dark.borderRadius) =>
 const spacing = (size: keyof typeof dark.spacing) => px(dark.spacing[size]);
 
 export default {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./app/**/*.{jsx,tsx}"],
   theme: {
     colors: dark.color,
     spacing: {
