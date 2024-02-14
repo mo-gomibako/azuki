@@ -2,6 +2,8 @@ import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { rpcClient } from "@/rpc/client";
 
+import "@/tailwind.css";
+
 export const meta: MetaFunction = () => {
   return [{ title: "azuki" }, { name: "description", content: "🫘" }];
 };
