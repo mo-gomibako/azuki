@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Root,
-  beforeLoad: () => ({
-    getTitle: () => "azuki",
-    getDescription: () => "🫘",
-  }),
+  staticData: {
+    title: "ホーム - azuki",
+    description: "🏠 - 🫘",
+  },
 });
 
 function Root() {

@@ -4,9 +4,14 @@ import { tv } from "tailwind-variants";
 import Icon from "./Icon";
 import Dialog, { useDialog } from "./Dialog";
 import { Link } from "@tanstack/react-router";
+import { useAuth } from "./AuthProvider";
 
 export default function Layout({ children }: PropsWithChildren) {
   const { getReferenceProps, setReference, ...modalProps } = useDialog();
+
+  const { user } = useAuth();
+  console.log({ user });
+
   return (
     <div className="[--footer-height:72px] [--header-height:80px] [--navigation-rail-width:96px]">
       <div className="pt-[calc(var(--header-height))] compact:pb-[var(--footer-height)] medium:pb-[var(--footer-height)] expanded:pl-[var(--navigation-rail-width)] large:pl-[var(--navigation-rail-width)]">
